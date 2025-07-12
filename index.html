@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card Component</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+      width: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 8px;
+      color: #222;
+    }
+
+    .card-description {
+      font-size: 0.95rem;
+      color: #666;
+      margin: 0;
+    }
+
+    .card-icons {
+      margin-top: 12px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .card-icons a svg {
+      fill: #555;
+      width: 22px;
+      height: 22px;
+      transition: fill 0.3s ease;
+    }
+
+    .card-icons a:hover svg {
+      fill: #007bff;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        width: 100%;
+        margin: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="magazine.png" alt="Project screenshot" class="card-image" />
+    <div class="card-body">
+      <h3 class="card-title">E-Commerce Site</h3>
+      <p class="card-description">Built with React and Shadcn UI</p>
+      <div class="card-icons">
+        <a href="https://github.com/your-repo" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0.297C5.372 0.297 0 5.67 0 12.297c0 5.292 3.438 9.788 8.205 11.387.6.113.82-.26.82-.577 0-.285-.011-1.04-.017-2.042-3.338.724-4.042-1.61-4.042-1.61-.546-1.386-1.333-1.755-1.333-1.755-1.09-.745.083-.73.083-.73 1.204.085 1.837 1.237 1.837 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.776.418-1.305.76-1.604-2.665-.305-5.467-1.332-5.467-5.932 0-1.31.467-2.38 1.235-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.018.005 2.045.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.873.12 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.807 5.624-5.479 5.921.43.37.814 1.096.814 2.21 0 1.595-.015 2.882-.015 3.274 0 .32.217.694.825.576C20.565 22.08 24 17.586 24 12.297 24 5.67 18.627.297 12 .297z"/>
+          </svg>
+        </a>
+        <a href="https://your-live-site.com" target="_blank" rel="noopener noreferrer" aria-label="Live Preview">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 512 512">
+                <path d="M320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h86.1L201 301.1c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L451.3 141.3V224c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM64 96C28.7 96 0 124.7 0 160v288c0 35.3 28.7 64 64 64h288c35.3 0 64-28.7 64-64V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v128H64V160h128c17.7 0 32-14.3 32-32s-14.3-32-32-32H64z"/>
+            </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
