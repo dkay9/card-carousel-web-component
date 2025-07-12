@@ -19,11 +19,11 @@ class CardItem extends HTMLElement {
     render() {
         const image = this.getAttribute('image') || ''
         const title = this.getAttribute('title') || ''
-        const description = this.getAttribute('title') || ''
+        const description = this.getAttribute('description') || ''
         const github = this.getAttribute('github') || '#'
         const preview = this.getAttribute('preview') || '#'
 
-        this.ShadowRoot.innerHTML = `
+        this.shadowRoot.innerHTML = `
         <style>
             :host {
             font-family: 'Segoe UI', sans-serif;
@@ -143,3 +143,5 @@ class CardItem extends HTMLElement {
         `
     }
 }
+
+customElements.define('card-item', CardItem)

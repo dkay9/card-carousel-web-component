@@ -5,15 +5,34 @@
   <title>Card Web Component</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-<body class="dark"> <!-- Optional: toggle this for dark mode -->
-  <card-item
-    image="magazine.png"
-    title="E-Commerce Site"
-    description="Built with React and Shadcn UI"
-    github="https://github.com/your-repo"
-    preview="https://your-live-site.com"
-  ></card-item>
+<body class="dark">
+  <card-carousel>
+    <card-item
+      image="img1.png"
+      title="Project One"
+      description="React + Tailwind"
+      github="https://github.com/one"
+      preview="https://one.com"
+    ></card-item>
+
+    <card-item
+      image="img2.png"
+      title="Project Two"
+      description="Vue + Pinia"
+      github="https://github.com/two"
+      preview="https://two.com"
+    ></card-item>
+
+    <card-item
+      image="img3.png"
+      title="Project Three"
+      description="Next.js + Tailwind"
+      github="https://github.com/three"
+      preview="https://three.com"
+    ></card-item>
+  </card-carousel>
 
   <script type="module" src="./card-item.js"></script>
+  <script type="module" src="./card-carousel.js"></script>
 </body>
 </html>
