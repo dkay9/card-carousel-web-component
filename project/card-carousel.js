@@ -40,6 +40,10 @@ class CardCarousel extends HTMLElement {
           position: relative;
           width: 100%;
           height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
         }
 
         /* Base style for every card-item */
@@ -50,6 +54,8 @@ class CardCarousel extends HTMLElement {
           opacity: 0;
           filter: grayscale(100%);
           pointer-events: none;
+          width: 300px;
+          max-width: 90%;
         }
 
         /* Centered active card */
@@ -63,14 +69,14 @@ class CardCarousel extends HTMLElement {
 
         /* Left-side card */
         ::slotted(.left) {
-          transform: translateX(-120%) scale(0.9);
+          transform: translateX(-140%) scale(0.9);
           opacity: 0.6;
           z-index: 2;
         }
 
         /* Right-side card */
         ::slotted(.right) {
-          transform: translateX(120%) scale(0.9);
+          transform: translateX(140%) scale(0.9);
           opacity: 0.6;
           z-index: 2;
         }
