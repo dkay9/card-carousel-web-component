@@ -21,7 +21,7 @@ class CardCarousel extends HTMLElement {
           display: block;
           position: relative;
           width: 100%;
-          max-width: 800px;
+          max-width: 1024px;
           margin: 0 auto;
           overflow: hidden;
         }
@@ -69,14 +69,14 @@ class CardCarousel extends HTMLElement {
 
         /* Left-side card */
         ::slotted(.left) {
-          transform: translateX(-140%) scale(0.9);
+          transform: translateX(-100%) scale(0.9);
           opacity: 0.6;
           z-index: 2;
         }
 
         /* Right-side card */
         ::slotted(.right) {
-          transform: translateX(140%) scale(0.9);
+          transform: translateX(100%) scale(0.9);
           opacity: 0.6;
           z-index: 2;
         }
@@ -115,6 +115,11 @@ class CardCarousel extends HTMLElement {
         .nav.next {
           right: 8px;
         }
+        .nav:disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
       </style>
 
       <div class="carousel-frame">
@@ -136,16 +141,22 @@ class CardCarousel extends HTMLElement {
     // Initialize first card view
     this.updateCardStyles();
 
-    // Handle Prev button click
-    this.shadowRoot.querySelector('.prev').addEventListener('click', () => {
-      this.currentIndex = (this.currentIndex - 1 + this.cards.length) % this.cards.length;
-      this.updateCardStyles();
+    // Prev button
+    this.prevButton = this.shadowRoot.querySelector('.prev');
+    this.prevButton.addEventListener('click', () => {
+    if (this.currentIndex > 0) {
+        this.currentIndex--;
+        this.updateCardStyles();
+    }
     });
 
-    // Handle Next button click
-    this.shadowRoot.querySelector('.next').addEventListener('click', () => {
-      this.currentIndex = (this.currentIndex + 1) % this.cards.length;
-      this.updateCardStyles();
+    // Next button
+    this.nextButton = this.shadowRoot.querySelector('.next');
+    this.nextButton.addEventListener('click', () => {
+    if (this.currentIndex < this.cards.length - 1) {
+        this.currentIndex++;
+        this.updateCardStyles();
+    }
     });
 
     // Optional: Keyboard navigation (← / →)
@@ -156,24 +167,30 @@ class CardCarousel extends HTMLElement {
     });
   }
 
-  // Apply appropriate classes to cards based on current index
-  updateCardStyles() {
+    // Apply appropriate classes to cards based on current index
+    updateCardStyles() {
     this.cards.forEach((card, i) => {
-      // Reset all state classes
-      card.classList.remove('active', 'left', 'right', 'hidden');
+        // Reset all state classes
+        card.classList.remove('active', 'left', 'right', 'hidden');
 
-      // Assign position-based class
-      if (i === this.currentIndex) {
+        // Assign position-based class
+        if (i === this.currentIndex) {
         card.classList.add('active');
-      } else if (i === (this.currentIndex - 1 + this.cards.length) % this.cards.length) {
+        } else if (i === this.currentIndex - 1) {
         card.classList.add('left');
-      } else if (i === (this.currentIndex + 1) % this.cards.length) {
+        } else if (i === this.currentIndex + 1) {
         card.classList.add('right');
-      } else {
+        } else {
         card.classList.add('hidden');
-      }
+        }
     });
-  }
+
+    // 🔒 Disable/enable nav buttons appropriately
+    if (this.prevButton && this.nextButton) {
+        this.prevButton.disabled = this.currentIndex === 0;
+        this.nextButton.disabled = this.currentIndex === this.cards.length - 1;
+    }
+    }
 }
 
 // Register the custom element
