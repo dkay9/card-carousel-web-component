@@ -193,11 +193,6 @@ class CardCarousel extends HTMLElement {
           display: none;
         }
 
-        ::slotted(.left),
-        ::slotted(.right) {
-          cursor: pointer;
-        }
-
         .nav {
           background: #ffffffcc;
           border: none;
@@ -330,15 +325,19 @@ class CardCarousel extends HTMLElement {
       }
     });
 
-    // Bind click to side cards
+    // Enable clicking left/right cards to activate them
     this.cards.forEach((card, index) => {
-      card.onclick = null; // remove previous listeners
+      // First remove any previous listener to prevent stacking
+      card.onclick = null;
 
       if (card.classList.contains('left') || card.classList.contains('right')) {
+        card.style.cursor = 'pointer'; // manually apply cursor
         card.onclick = () => {
           this.currentIndex = index;
           this.updateCardStyles();
         };
+      } else {
+        card.style.cursor = 'default';
       }
     });
 
