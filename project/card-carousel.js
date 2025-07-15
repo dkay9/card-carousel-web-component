@@ -5,6 +5,8 @@ class CardCarousel extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.currentIndex = 0; // Track currently active card
     this.cards = [];       // Will hold <card-item> references
+    this.startX = 0;
+    this.endX = 0;
   }
 
   // Called when the element is added to the DOM
@@ -120,6 +122,26 @@ class CardCarousel extends HTMLElement {
           cursor: not-allowed;
           pointer-events: none;
         }
+        .pagination-dots {
+          display: flex;
+          justify-content: center;
+          gap: 6px;
+          margin-top: 16px;
+        }
+
+        .pagination-dots span {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #ccc;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+
+        .pagination-dots span.active {
+          background: #007bff;
+        }
+
       </style>
 
       <div class="carousel-frame">
@@ -129,6 +151,7 @@ class CardCarousel extends HTMLElement {
         </div>
         <button class="nav next" aria-label="Next">&#10095;</button>
       </div>
+      <div class="pagination-dots"></div>
     `;
   }
 
@@ -159,6 +182,19 @@ class CardCarousel extends HTMLElement {
     }
     });
 
+    // Swipe support for mobile
+    const frame = this.shadowRoot.querySelector('.carousel-frame');
+
+    frame.addEventListener('touchstart', (e) => {
+    this.startX = e.touches[0].clientX;
+    });
+
+    frame.addEventListener('touchend', (e) => {
+    this.endX = e.changedTouches[0].clientX;
+    this.handleSwipe();
+    });
+
+
     // Optional: Keyboard navigation (← / →)
     this.setAttribute('tabindex', 0);
     this.addEventListener('keydown', (e) => {
@@ -169,28 +205,58 @@ class CardCarousel extends HTMLElement {
 
     // Apply appropriate classes to cards based on current index
     updateCardStyles() {
-    this.cards.forEach((card, i) => {
-        // Reset all state classes
-        card.classList.remove('active', 'left', 'right', 'hidden');
+        this.cards.forEach((card, i) => {
+            // Reset all state classes
+            card.classList.remove('active', 'left', 'right', 'hidden');
 
-        // Assign position-based class
-        if (i === this.currentIndex) {
-        card.classList.add('active');
-        } else if (i === this.currentIndex - 1) {
-        card.classList.add('left');
-        } else if (i === this.currentIndex + 1) {
-        card.classList.add('right');
-        } else {
-        card.classList.add('hidden');
+            // Assign position-based class
+            if (i === this.currentIndex) {
+            card.classList.add('active');
+            } else if (i === this.currentIndex - 1) {
+            card.classList.add('left');
+            } else if (i === this.currentIndex + 1) {
+            card.classList.add('right');
+            } else {
+            card.classList.add('hidden');
+            }
+        });
+
+        // Rendering the pagination
+        const dotContainer = this.shadowRoot.querySelector('.pagination-dots');
+        if (dotContainer) {
+        dotContainer.innerHTML = ''; // clear existing
+        this.cards.forEach((_, index) => {
+            const dot = document.createElement('span');
+            if (index === this.currentIndex) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+            this.currentIndex = index;
+            this.updateCardStyles();
+            });
+            dotContainer.appendChild(dot);
+        });
         }
-    });
 
-    // 🔒 Disable/enable nav buttons appropriately
-    if (this.prevButton && this.nextButton) {
-        this.prevButton.disabled = this.currentIndex === 0;
-        this.nextButton.disabled = this.currentIndex === this.cards.length - 1;
+        // 🔒 Disable/enable nav buttons appropriately
+        if (this.prevButton && this.nextButton) {
+            this.prevButton.disabled = this.currentIndex === 0;
+            this.nextButton.disabled = this.currentIndex === this.cards.length - 1;
+        }
     }
-    }
+    handleSwipe() {
+        const delta = this.startX - this.endX;
+        const threshold = 50; // Minimum swipe distance
+
+        if (delta > threshold && this.currentIndex < this.cards.length - 1) {
+            // Swipe left → go to next
+            this.currentIndex++;
+            this.updateCardStyles();
+        } else if (delta < -threshold && this.currentIndex > 0) {
+            // Swipe right → go to previous
+            this.currentIndex--;
+            this.updateCardStyles();
+        }
+    }   
+
 }
 
 // Register the custom element
