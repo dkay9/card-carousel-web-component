@@ -197,7 +197,7 @@ class CardCarousel extends HTMLElement {
         ::slotted(.right) {
           cursor: pointer;
         }
-          
+
         .nav {
           background: #ffffffcc;
           border: none;
@@ -258,53 +258,44 @@ class CardCarousel extends HTMLElement {
   }
 
   setup() {
-    this.cards = Array.from(this.querySelectorAll('card-item'));
-    this.prevButton = this.shadowRoot.querySelector('.prev');
-    this.nextButton = this.shadowRoot.querySelector('.next');
+  this.cards = Array.from(this.querySelectorAll('card-item'));
+  this.prevButton = this.shadowRoot.querySelector('.prev');
+  this.nextButton = this.shadowRoot.querySelector('.next');
 
-    // 👇 Click support on side cards
-    this.cards.forEach((card, index) => {
-      card.addEventListener('click', () => {
-        if (index === this.currentIndex - 1 || index === this.currentIndex + 1) {
-          this.currentIndex = index;
-          this.updateCardStyles();
-        }
-      });
-    });
+  // Navigation: Previous
+  this.prevButton.addEventListener('click', () => {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.updateCardStyles();
+    }
+  });
 
-    // Previous navigation
-    this.prevButton.addEventListener('click', () => {
-      if (this.currentIndex > 0) {
-        this.currentIndex--;
-        this.updateCardStyles();
-      }
-    });
+  // Navigation: Next
+  this.nextButton.addEventListener('click', () => {
+    if (this.currentIndex < this.cards.length - 1) {
+      this.currentIndex++;
+      this.updateCardStyles();
+    }
+  });
 
-    // Next navigation
-    this.nextButton.addEventListener('click', () => {
-      if (this.currentIndex < this.cards.length - 1) {
-        this.currentIndex++;
-        this.updateCardStyles();
-      }
-    });
+  // Keyboard support
+  this.setAttribute('tabindex', 0);
+  this.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') this.prevButton.click();
+    if (e.key === 'ArrowRight') this.nextButton.click();
+  });
 
-    // Keyboard support
-    this.setAttribute('tabindex', 0);
-    this.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') this.prevButton.click();
-      if (e.key === 'ArrowRight') this.nextButton.click();
-    });
+  // Swipe gesture support
+  const frame = this.shadowRoot.querySelector('.carousel-frame');
+  frame.addEventListener('touchstart', (e) => {
+    this.startX = e.touches[0].clientX;
+  });
+  frame.addEventListener('touchend', (e) => {
+    this.endX = e.changedTouches[0].clientX;
+    this.handleSwipe();
+  });
 
-    // Swipe gesture support for mobile
-    const frame = this.shadowRoot.querySelector('.carousel-frame');
-    frame.addEventListener('touchstart', (e) => {
-      this.startX = e.touches[0].clientX;
-    });
-    frame.addEventListener('touchend', (e) => {
-      this.endX = e.changedTouches[0].clientX;
-      this.handleSwipe();
-    });
-
+  // Initial render
   this.updateCardStyles();
 }
 
@@ -336,6 +327,18 @@ class CardCarousel extends HTMLElement {
         card.classList.add('right');
       } else {
         card.classList.add('hidden');
+      }
+    });
+
+    // Bind click to side cards
+    this.cards.forEach((card, index) => {
+      card.onclick = null; // remove previous listeners
+
+      if (card.classList.contains('left') || card.classList.contains('right')) {
+        card.onclick = () => {
+          this.currentIndex = index;
+          this.updateCardStyles();
+        };
       }
     });
 
