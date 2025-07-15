@@ -193,6 +193,11 @@ class CardCarousel extends HTMLElement {
           display: none;
         }
 
+        ::slotted(.left),
+        ::slotted(.right) {
+          cursor: pointer;
+        }
+          
         .nav {
           background: #ffffffcc;
           border: none;
@@ -260,10 +265,9 @@ class CardCarousel extends HTMLElement {
     // 👇 Click support on side cards
     this.cards.forEach((card, index) => {
       card.addEventListener('click', () => {
-        if (index === this.currentIndex - 1) {
-          this.prevButton.click();
-        } else if (index === this.currentIndex + 1) {
-          this.nextButton.click();
+        if (index === this.currentIndex - 1 || index === this.currentIndex + 1) {
+          this.currentIndex = index;
+          this.updateCardStyles();
         }
       });
     });
