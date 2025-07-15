@@ -257,6 +257,17 @@ class CardCarousel extends HTMLElement {
     this.prevButton = this.shadowRoot.querySelector('.prev');
     this.nextButton = this.shadowRoot.querySelector('.next');
 
+    // 👇 Click support on side cards
+    this.cards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        if (index === this.currentIndex - 1) {
+          this.prevButton.click();
+        } else if (index === this.currentIndex + 1) {
+          this.nextButton.click();
+        }
+      });
+    });
+
     // Previous navigation
     this.prevButton.addEventListener('click', () => {
       if (this.currentIndex > 0) {
@@ -282,18 +293,17 @@ class CardCarousel extends HTMLElement {
 
     // Swipe gesture support for mobile
     const frame = this.shadowRoot.querySelector('.carousel-frame');
-
     frame.addEventListener('touchstart', (e) => {
       this.startX = e.touches[0].clientX;
     });
-
     frame.addEventListener('touchend', (e) => {
       this.endX = e.changedTouches[0].clientX;
       this.handleSwipe();
     });
 
-    this.updateCardStyles();
-  }
+  this.updateCardStyles();
+}
+
 
   // Swipe logic
   handleSwipe() {
