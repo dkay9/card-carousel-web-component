@@ -1,59 +1,151 @@
-# Card Carousel
+# Card Carousel Web Component
 
-![Card Carousel Codepen Examples](weatherwidget.gif)
+![card carousel code pen example](./cursor.gif)
 
-A simple weather widget that shows current conditions in a window-style display with animated effects.
+A reusable web component that creates a carousel with a reusable card item 
 
-## How to Use
+## Usage
 
-Include the JavaScript file and add the HTML tag:
-
+1. Include the script in your HTML:
 ```html
-<script src="https://raw.githack.com/DevManSam777/weather-widget/main/weather-widget.js"></script>
-<weather-widget location="New York, New York"></weather-widget>
+<script src="https://raw.githack.com/dkay9/card-carousel-web-component/main/card-carousel.js" type="module" defer></script>
 ```
 
-## Options
-
+2. Add the component to your page:
 ```html
-<!-- City names -->
-<weather-widget location="New York, New York"></weather-widget>
-<weather-widget location="London, UK"></weather-widget>
-
-<!-- ZIP codes -->
-<weather-widget location="10001"></weather-widget>
-<weather-widget location="90210"></weather-widget>
-
-<!-- Coordinates -->
-<weather-widget location="40.7128,-74.0060"></weather-widget>
-
-<!-- Airport codes -->
-<weather-widget location="LAX"></weather-widget>
-
-<!-- With Fahrenheit -->
-<weather-widget location="Miami, FL" units="F"></weather-widget>
-
-<!-- With Celsius -->
-<weather-widget location="London, UK" units="C"></weather-widget>
+<card-carousel>
+  <card-item
+     image=""
+     title=""
+     description=""
+     github=""
+     preview=""
+  ></card-item>
+  <card-item
+     image=""
+     title=""
+     description=""
+     github=""
+     preview=""
+  ></card-item>
+  <card-item
+     image=""
+     title=""
+     description=""
+     github=""
+     preview=""
+  ></card-item>
+</card-carousel>
 ```
 
-## What It Does
+## Example
 
-- Shows current temperature, weather condition, and local time
-- Updates weather data every 15 minutes automatically  
-- Changes between day/night themes based on actual sunrise/sunset times
-- Animated effects for different weather (rain, snow, clouds, etc.)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { cursor: none; }
+    </style>
+</head>
+<body>
+    <custom-cursor theme="blue"></custom-cursor>
+    <h1>Your content here</h1>
+    <script src="custom-cursor.js"></script>
+</body>
+</html>
+```
 
-## Browser Requirements
+## Features
 
-Works in modern browsers that support Web Components (Chrome, Firefox, Safari, Edge).
+- Multiple color themes (orange, blue, magenta)
+- Gradient trail effect
+- Click animation effects
+- Automatically hides on touch devices
+- No dependencies required
+- Works in all modern browsers# Custom Cursor Web Component
 
-## Size
+![animated cursor gif](./cursor.gif)
 
-The widget is 280px wide by 200px tall. You can scale it with CSS:
+A reusable web component that creates a custom cursor with gradient trail effect.
 
+## Usage
+
+1. Include the script in your HTML:
+```html
+<script src="https://raw.githack.com/DevManSam777/custom-cursor/main/custom-cursor.js" defer></script>
+```
+
+2. Add the component to your page:
+```html
+<custom-cursor></custom-cursor>
+```
+
+3. Hide the default cursor:
 ```css
-weather-widget {
-  transform: scale(1.5);
+body {
+    cursor: none;
 }
 ```
+
+## Themes
+
+You can change the color theme using the `theme` attribute:
+
+```html
+<!-- Default orange theme -->
+<custom-cursor></custom-cursor>
+
+<!-- Blue theme -->
+<custom-cursor theme="blue"></custom-cursor>
+
+<!-- Magenta theme -->
+<custom-cursor theme="magenta"></custom-cursor>
+```
+
+Available themes: `orange` (default), `blue`, `magenta`
+
+## Example
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://raw.githack.com/dkay9/card-carousel-web-component/main/card-carousel.js" type="module" defer></script>
+</head>
+<body>
+    <card-carousel>
+      <card-item
+         image=""
+         title=""
+         description=""
+         github=""
+         preview=""
+      ></card-item>
+      <card-item
+         image=""
+         title=""
+         description=""
+         github=""
+         preview=""
+      ></card-item>
+      <card-item
+         image=""
+         title=""
+         description=""
+         github=""
+         preview=""
+      ></card-item>
+    </card-carousel>
+</body>
+</html>
+```
+
+## Features
+
+- Multiple color themes (orange, blue, magenta)
+- Gradient trail effect
+- Click animation effects
+- Automatically hides on touch devices
+- No dependencies required
+- Works in all modern browsers
