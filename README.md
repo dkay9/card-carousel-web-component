@@ -1,6 +1,6 @@
 # Card Carousel
 
-![Weather Widget Codepen Examples](weatherwidget.gif)
+![Card Carousel Codepen Examples](weatherwidget.gif)
 
 A simple weather widget that shows current conditions in a window-style display with animated effects.
 
