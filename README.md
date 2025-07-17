@@ -1,6 +1,6 @@
 # Card Carousel Web Component
 
-![card carousel code pen example](./Card-carousel.gif)
+![card carousel code pen example](./Card-Carousel.gif)
 
 A reusable web component that creates a carousel with a reusable card item 
 
@@ -49,25 +49,25 @@ A reusable web component that creates a carousel with a reusable card item
 <body>
     <card-carousel>
       <card-item
-         image=""
-         title=""
-         description=""
-         github=""
-         preview=""
+         image="https://picsum.photos/320/200"
+         title="E-Commerce Website"
+         description="Svelte + Vite"
+         github="https://github.com/<user-name>/<repo-name>"
+         preview="<link-to-live-site>"
       ></card-item>
       <card-item
-         image=""
-         title=""
-         description=""
-         github=""
-         preview=""
+         image="https://picsum.photos/320/200"
+         title="Gym App"
+         description="Php + Laravel"
+         github="https://github.com/<user-name>/<repo-name>"
+         preview="<link-to-live-site>"
       ></card-item>
       <card-item
-         image=""
-         title=""
-         description=""
-         github=""
-         preview=""
+         image="https://picsum.photos/320/200"
+         title="Browser Extension UI"
+         description="Javascript + Tailwind Css"
+         github="https://github.com/<user-name>/<repo-name>"
+         preview="<link-to-live-site>"
       ></card-item>
     </card-carousel>
 </body>
