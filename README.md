@@ -76,9 +76,6 @@ A reusable web component that creates a carousel with a reusable card item
 
 ## Features
 
-- Multiple color themes (orange, blue, magenta)
-- Gradient trail effect
-- Click animation effects
-- Automatically hides on touch devices
-- No dependencies required
-- Works in all modern browsers# Custom Cursor Web Component
+- Card-item web component
+- You can pass in card content as attributes
+- Grayscale on inactive cards to highlight active card more
