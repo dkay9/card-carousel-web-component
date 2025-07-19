@@ -14,27 +14,9 @@ A reusable web component that creates a carousel with a reusable card item
 2. Add the component to your page:
 ```html
 <card-carousel>
-  <card-item
-     image=""
-     title=""
-     description=""
-     github=""
-     preview=""
-  ></card-item>
-  <card-item
-     image=""
-     title=""
-     description=""
-     github=""
-     preview=""
-  ></card-item>
-  <card-item
-     image=""
-     title=""
-     description=""
-     github=""
-     preview=""
-  ></card-item>
+  <card-item></card-item>
+  <card-item></card-item>
+  <card-item></card-item>
 </card-carousel>
 ```
 
