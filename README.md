@@ -1,6 +1,6 @@
 # Card Carousel Web Component
 
-![card carousel code pen example](./Card-Carousel.gif)
+![card carousel code pen example](./card-carousel.gif)
 
 A reusable web component that creates a carousel with a reusable card item 
 
