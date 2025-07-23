@@ -128,8 +128,13 @@ class CardCarousel extends HTMLElement {
   }
 
   connectedCallback() {
-    this.render();
-    this.setup();
+    this.setAttribute('hidden', '')
+
+    requestAnimationFrame(() => {
+      this.render()
+      this.setup()
+      this.removeAttribute('hidden')
+    })
   }
 
   render() {
@@ -140,6 +145,10 @@ class CardCarousel extends HTMLElement {
           position: relative;
           max-width: 1024px;
           margin: 0 auto;
+        }
+
+        :host([hidden]) {
+          display: none;
         }
 
         .carousel-frame {
