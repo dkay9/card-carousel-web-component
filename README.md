@@ -52,7 +52,7 @@ A reusable web component that creates a carousel with a reusable card item
          preview="<link-to-live-site>"
       ></card-item>
     </card-carousel>
-</body>
+</body> 
 </html>
 ```
 
