@@ -128,12 +128,12 @@ class CardCarousel extends HTMLElement {
   }
 
   connectedCallback() {
-    this.setAttribute('hidden', '')
+    this.setAttribute('hidden', '') // Prevents Flash of Unstyled Content (FOUC)
 
     requestAnimationFrame(() => {
-      this.render()
-      this.setup()
-      this.removeAttribute('hidden')
+      this.render() // Build DOM content
+      this.setup() // Attach events, do layout logic
+      this.removeAttribute('hidden') // Show component only when ready
     })
   }
 
